@@ -4200,13 +4200,13 @@ img {
   display: none; }
 
 .clear-filter[filter-color="orange"] {
-  background: rgba(44, 44, 44, 0.2);
+  background: rgba(44, 44, 44, 0.1);
   /* For browsers that do not support gradients */
   /* For Safari 5.1 to 6.0 */
   /* For Opera 11.1 to 12.0 */
   /* For Firefox 3.6 to 15 */
-  background: -webkit-gradient(linear, left bottom, left top, from(rgba(44, 44, 44, 0.2)), to(rgba(224, 23, 3, 0.6)));
-  background: linear-gradient(0deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(44, 44, 44, 0.1)), to(rgba(18, 38, 50, 0.6)));
+  background: linear-gradient(0deg, rgba(44, 44, 44, 0.1), rgba(18, 38, 50, 0.6));
   /* Standard syntax */ }
 
 .section-story-overview {
@@ -4365,7 +4365,13 @@ img {
     background-color: #FFFFFF; }
   [data-background-color]:not([data-background-color="gray"]) .navbar.bg-white p {
     color: #889298; }
-  [data-background-color]:not([data-background-color="gray"]) h1, [data-background-color]:not([data-background-color="gray"]) h2, [data-background-color]:not([data-background-color="gray"]) h3, [data-background-color]:not([data-background-color="gray"]) h4, [data-background-color]:not([data-background-color="gray"]) h5, [data-background-color]:not([data-background-color="gray"]) h6, [data-background-color]:not([data-background-color="gray"]) a:not(.btn):not(.dropdown-item),
+  [data-background-color]:not([data-background-color="gray"]) h1,
+  [data-background-color]:not([data-background-color="gray"]) h2,
+  [data-background-color]:not([data-background-color="gray"]) h3,
+  [data-background-color]:not([data-background-color="gray"]) h4,
+  [data-background-color]:not([data-background-color="gray"]) h5,
+  [data-background-color]:not([data-background-color="gray"]) h6,
+  [data-background-color]:not([data-background-color="gray"]) a:not(.btn):not(.dropdown-item),
   [data-background-color]:not([data-background-color="gray"]) .icons-container {
     color: #FFFFFF; }
   [data-background-color]:not([data-background-color="gray"]) .input-group-text,
