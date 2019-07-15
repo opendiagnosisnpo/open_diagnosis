@@ -5,6 +5,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var open = require('gulp-open');
 var browserSync = require('browser-sync').create();
+const imagemin = require('gulp-imagemin');
 
 var Paths = {
   HERE: './',
@@ -45,4 +46,18 @@ gulp.task('browserSync', function () {
   });
 });
 
+
 gulp.task('dev', ['open', 'watch', 'browserSync']);
+
+// function imgSquash() {
+//   return gulp.src("./assets/img/*")
+//     .pipe(imagemin())
+//     .pipe(gulp.dest("./vendor"));
+// };
+
+// gulp.task("imgSquash", imgSquash)
+// gulp.task("watch", function () {
+//   gulp.watch("./assets/img/*", imgSquash)
+// });
+
+// gulp.task("default", gulp.series("imgSquash", "watch"));
