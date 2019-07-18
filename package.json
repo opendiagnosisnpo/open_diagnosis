@@ -1,21 +1,31 @@
 {
   "name": "Open Diagnosis Foundation",
-  "description": "website for the Open Diagnosis Foundation",
-  "version": "1.0.1",
-  "homepage": "http://opendiagnosis.foundation",
-  "author": "Ryan & Chris Koch",
-  "license": " ",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-install": "^1.1.0",
-    "gulp-livereload": "^4.0.1",
-    "gulp-open": "^3.0.1",
-    "gulp-sass": "^4.0.1",
-    "gulp-sourcemaps": "^2.6.4"
+  "version": "1.0.0",
+  "description": "open diagnosis website",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
   },
   "dependencies": {
-    "browser-sync": "^2.26.7"
-  }
+    "browser-sync": "^2.26.7",
+    "gulp-livereload": "^4.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^6.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opendiagnosisnpo/open_diagnosis.git"
+  },
+  "author": "Ryan Koch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/opendiagnosisnpo/open_diagnosis/issues"
+  },
+  "homepage": "https://github.com/opendiagnosisnpo/open_diagnosis#readme"
 }
