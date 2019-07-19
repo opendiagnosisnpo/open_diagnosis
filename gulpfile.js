@@ -1,34 +1,42 @@
+'use strict';
 var gulp = require('gulp');
 var path = require('path');
 var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
 var open = require('gulp-open');
 var browserSync = require('browser-sync').create();
-const imagemin = require('gulp-imagemin');
+var image = require('gulp-image');
 
 var Paths = {
   HERE: './',
-  DIST: 'dist/',
-  CSS: './assets/css/',
+  CSS: './production/assets/css/',
   SCSS_TOOLKIT_SOURCES: './assets/scss/now-ui-kit.scss',
-  SCSS: './assets/scss/**/**'
+  SCSS: './production/assets/scss/**/**'
 };
 
-gulp.task('compile-scss', function () {
-  return gulp.src(Paths.SCSS_TOOLKIT_SOURCES)
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(sourcemaps.write(Paths.HERE))
-    .pipe(gulp.dest(Paths.CSS));
+// Copy third party libraries from /node_modules into / production
+// gulp.task('production', function () {
+//   gulp.src([
+//     './node_modules/bootstrap/dist/**/*',
+//     '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
+//     '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
+//   ]).pipe(gulp.dest('./production/bootstrap'))
+// });
+
+gulp.task('compile-scss', () => {
+  return gulp.src('./assets/scss/**/*.scss')
+    .pipe(sass.sync({
+      outputStyle: 'expanded'
+    }).on('error', sass.logError))
+    .pipe(gulp.dest(Paths.CSS))
 });
 
-gulp.task('watch', function () {
-  gulp.watch(Paths.SCSS, ['compile-scss']);
+gulp.task('image', () => {
+  gulp.src('./assets/img/*')
+    .pipe(image())
+    .pipe(gulp.dest('./production/assets/img'));
 });
 
-gulp.task('open', function () {
+gulp.task('open', () => {
   gulp.src('index.html')
     .pipe(open());
 });
@@ -47,17 +55,19 @@ gulp.task('browserSync', function () {
 });
 
 
-gulp.task('dev', ['open', 'watch', 'browserSync']);
 
-// function imgSquash() {
-//   return gulp.src("./assets/img/*")
-//     .pipe(imagemin())
-//     .pipe(gulp.dest("./vendor"));
-// };
+gulp.task('dev', gulp.parallel(['browserSync', 'compile-scss', 'open']), () => {
+  gulp.watch('./assets/scss/**/*.sccs', ['compile-scss']);
+  gulp.watch('./assets/js/*.js', ['js']);
+  gulp.watch('./*.html', browserSync.reload);
+});
 
-// gulp.task("imgSquash", imgSquash)
-// gulp.task("watch", function () {
-//   gulp.watch("./assets/img/*", imgSquash)
-// });
+// Copies assets needed for production into production folder
+gulp.task('copy', () => {
+  gulp.src('./index.html').pipe(gulp.dest('./production/'));
+  gulp.src('./assets/fonts/*').pipe(gulp.dest('./production/assets/fonts/'));
+  gulp.src('./nucleo-icons.html').pipe(gulp.dest('./production/'));
+  gulp.src('./coming-soon.html').pipe(gulp.dest('./production/'));
+});
 
-// gulp.task("default", gulp.series("imgSquash", "watch"));
+gulp.task('production', gulp.series(['compile-scss', 'image', 'copy']));

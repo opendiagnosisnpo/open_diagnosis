@@ -1,19 +1,19 @@
 {
-  "name": "Open Diagnosis Foundation",
+  "name": "OpenDiagnosisFoundation",
   "version": "1.0.0",
   "description": "open diagnosis website",
   "main": "gulpfile.js",
-  "directories": {
-    "doc": "docs",
-    "example": "examples"
-  },
   "dependencies": {
-    "browser-sync": "^2.26.7",
-    "gulp-livereload": "^4.0.1"
+    "bootstrap": "^4.3.1"
   },
   "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
-    "gulp-imagemin": "^6.0.0"
+    "gulp-image": "^5.1.0",
+    "gulp-livereload": "^4.0.1",
+    "gulp-open": "^3.0.1",
+    "gulp-sass": "^4.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,9 +23,5 @@
     "url": "git+https://github.com/opendiagnosisnpo/open_diagnosis.git"
   },
   "author": "Ryan Koch",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/opendiagnosisnpo/open_diagnosis/issues"
-  },
-  "homepage": "https://github.com/opendiagnosisnpo/open_diagnosis#readme"
+  "license": "MIT"
 }
