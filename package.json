@@ -9,10 +9,13 @@
   "devDependencies": {
     "autoprefixer": "^9.6.1",
     "browser-sync": "^2.26.7",
+    "del": "^5.0.0",
     "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
     "gulp-image": "^5.1.0",
     "gulp-livereload": "^4.0.1",
     "gulp-open": "^3.0.1",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2"
   },
   "scripts": {
