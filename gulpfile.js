@@ -71,7 +71,7 @@ gulp.task('browserSync', (done) => {
 
 
 gulp.task('dev', gulp.parallel(['browserSync', 'css', 'open']), (done) => {
-  gulp.watch('./assets/scss/**/*.sccs', ['compile-scss'])
+  gulp.watch('./assets/scss/**/*.sccs', ['css'])
   gulp.watch('./assets/js/*.js', ['js'])
   gulp.watch('./*.html', browserSync.reload)
   done()
