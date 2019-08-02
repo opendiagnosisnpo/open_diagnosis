@@ -2711,7 +2711,7 @@ textarea.form-control:focus, textarea.form-control:active {
 
 .form-check.disabled .form-check-label,
 .form-check.disabled .form-check-label {
-  color: #42474b;
+  color: #212324;
   opacity: .5;
   cursor: not-allowed;
 }
@@ -2776,12 +2776,12 @@ textarea.form-control:focus, textarea.form-control:active {
 }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign {
-  color: #42474b;
+  color: #212324;
 }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::before,
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::after {
-  color: #42474b;
+  color: #212324;
 }
 
 .progress-container {
@@ -3172,14 +3172,14 @@ p {
 .description,
 .card-description,
 .footer-big p {
-  color: #42474b;
+  color: #212324;
   font-weight: 300;
 }
 
 .category {
   text-transform: capitalize;
   font-weight: 700;
-  color: #42474b;
+  color: #212324;
 }
 
 .text-primary {
@@ -3379,7 +3379,7 @@ body {
 }
 
 .nav-pills .nav-item .nav-link.active, .nav-pills .nav-item .nav-link.active:focus, .nav-pills .nav-item .nav-link.active:hover {
-  background-color: #42474b;
+  background-color: #212324;
   color: #FFFFFF;
   box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
 }
