@@ -2,10 +2,10 @@
 //
 //## For each of Bootstrap's buttons, define text, background and border color.
 
-$sans-serif-family: 'IBM Plex Serif',
-serif,
-'Roboto',
-sans-serif !default;
+$sans-serif-family: "Montserrat",
+"Helvetica Neue",
+"Arial",
+"sans-serif" !default;
 
 $none: 0 !default;
 $border-thin: 1px !default;
@@ -25,7 +25,7 @@ $black-hr: #444444 !default;
 
 $light-gray: #E3E3E3 !default;
 $medium-gray: #C9CDD0 !default;
-$dark-gray: #889298 !default;
+$dark-gray: #212324 !default;
 
 $opacity-gray-3: rgba(201, 205, 208, .3) !default;
 $opacity-gray-5: rgba(201, 205, 208, .5) !default;
@@ -43,7 +43,7 @@ $opacity-2: rgba(138, 146, 152, .2) !default;
 $transparent-bg: transparent !default;
 $dark-background: #555555 !default;
 
-$default-color: #889298 !default;
+$default-color: #42474b !default;
 $default-states-color: lighten($default-color, 6%) !default;
 $default-color-opacity: rgba(138, 146, 152, .6) !default;
 

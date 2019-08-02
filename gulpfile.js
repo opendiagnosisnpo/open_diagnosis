@@ -1,63 +1,95 @@
-var gulp = require('gulp');
-var path = require('path');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
-var open = require('gulp-open');
-var browserSync = require('browser-sync').create();
-const imagemin = require('gulp-imagemin');
+'use strict'
+var gulp = require('gulp')
+var sass = require('gulp-sass')
+var open = require('gulp-open')
+var cleanCSS = require('gulp-clean-css');
+var rename = require("gulp-rename");
+var browserSync = require('browser-sync').create()
+var image = require('gulp-image')
+var del = require('del')
 
-var Paths = {
-  HERE: './',
-  DIST: 'dist/',
-  CSS: './assets/css/',
-  SCSS_TOOLKIT_SOURCES: './assets/scss/now-ui-kit.scss',
-  SCSS: './assets/scss/**/**'
-};
+// Copy third party libraries from /node_modules into / production
+// gulp.task('production', function () {
+//   gulp.src([
+//     './node_modules/bootstrap/dist/**/*',
+//     '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
+//     '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
+//   ]).pipe(gulp.dest('./production/bootstrap'))
+// })
 
-gulp.task('compile-scss', function () {
-  return gulp.src(Paths.SCSS_TOOLKIT_SOURCES)
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(sourcemaps.write(Paths.HERE))
-    .pipe(gulp.dest(Paths.CSS));
-});
+gulp.task('css:compile', (done) => {
+  gulp.src('./assets/scss/**/*.scss')
+    .pipe(sass.sync({
+      outputStyle: 'expanded'
+    }).on('error', sass.logError))
+    .pipe(gulp.dest('./assets/css'))
+  done()
+})
 
-gulp.task('watch', function () {
-  gulp.watch(Paths.SCSS, ['compile-scss']);
-});
+// Minify CSS
+gulp.task('css:minify', (done) => {
+  gulp.src([
+    './assets/css/*.css',
+    '!./assets/css/*.min.css'
+  ])
+    .pipe(cleanCSS())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./assets/css'))
+  done()
+})
 
-gulp.task('open', function () {
+gulp.task('css', gulp.series(['css:compile', 'css:minify']))
+
+gulp.task('image', (done) => {
+  gulp.src('./assets/img/*')
+    .pipe(image())
+    .pipe(gulp.dest('./production/assets/img'))
+  done()
+})
+
+gulp.task('open', (done) => {
   gulp.src('index.html')
-    .pipe(open());
-});
+    .pipe(open())
+  done()
+})
 
 // Configure the browserSync task
-gulp.task('browserSync', function () {
-  var pathArray = Object.keys(Paths).map(function (path) {
-    return Paths[path];
-  });
+gulp.task('browserSync', (done) => {
+  var paths = ['./', './**/**.html', './assets/scss/**/**', './assets/js/*.js']
 
-  browserSync.init(pathArray, {
+  browserSync.init(paths, {
     server: {
       baseDir: './'
     }
-  });
-});
+  })
+
+  done()
+})
 
 
-gulp.task('dev', ['open', 'watch', 'browserSync']);
 
-// function imgSquash() {
-//   return gulp.src("./assets/img/*")
-//     .pipe(imagemin())
-//     .pipe(gulp.dest("./vendor"));
-// };
+gulp.task('dev', gulp.parallel(['browserSync', 'css', 'open']), (done) => {
+  gulp.watch('./assets/scss/**/*.sccs', ['css'])
+  gulp.watch('./assets/js/*.js', ['js'])
+  gulp.watch('./*.html', browserSync.reload)
+  done()
+})
 
-// gulp.task("imgSquash", imgSquash)
-// gulp.task("watch", function () {
-//   gulp.watch("./assets/img/*", imgSquash)
-// });
+gulp.task('clean', (done) => {
+  del.sync(['production/**'])
+  done()
+})
 
-// gulp.task("default", gulp.series("imgSquash", "watch"));
+// Copies assets needed for production into production folder
+gulp.task('copy', (done) => {
+  gulp.src('./assets/fonts/*').pipe(gulp.dest('./production/assets/fonts/'))
+  gulp.src('./assets/js/**/*.js').pipe(gulp.dest('./production/assets/js/'))
+  gulp.src('./assets/css/**/*.css').pipe(gulp.dest('./production/assets/css/'))
+  gulp.src('./index.html').pipe(gulp.dest('./production/'))
+  gulp.src('./*.html').pipe(gulp.dest('./production/'))
+  done()
+})
+
+gulp.task('production', gulp.series(['clean', 'css', 'image', 'copy']))
